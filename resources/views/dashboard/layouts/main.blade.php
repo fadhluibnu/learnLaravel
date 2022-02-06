@@ -46,6 +46,7 @@
     </script>
     <script src="/JS/dashboard.js"></script>
     <script src="/JS/slug.js"></script>
+    <script src="/JS/script.js"></script>
 </body>
 
 </html>

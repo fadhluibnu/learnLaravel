@@ -6,7 +6,7 @@
     </div>
 
     <div class="col-lg-8">
-        <form method="POST" action="/dashboard/posts" class="mb-5">
+        <form method="POST" action="/dashboard/posts" class="mb-5" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
@@ -22,11 +22,6 @@
                 <label for="slug" class="form-label">Slug</label>
                 <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug"
                     {{ @old('slug') }} required>
-                {{-- <div class="align-items-center d-none" id="spinner-cek">
-                    <div class="spinner-grow spinner-grow-sm" role="status">
-                    </div>
-                    <span class="ms-2">Mengecek ...</span>
-                </div> --}}
                 <div id="relatime-response" class="mt-1">
                 </div>
                 @error('slug')
@@ -50,6 +45,17 @@
                 </select>
             </div>
             <div class="mb-3">
+                <label for="image" class="form-label">Post Image</label>
+                <img class="img-preview img-fluid mb-3 col-sm-5">
+                <input class="form-control  @error('image') is-invalid @enderror" type="file" id="image" name="image"
+                    onchange="previewImage()">
+                @error('image')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="mb-3">
                 <label for="Body" class="form-label">Body</label>
                 <input id="body" type="hidden" name="body" value="{{ @old('body') }}">
                 <trix-editor input="body"></trix-editor>
@@ -57,5 +63,8 @@
             <button type="submit" id="submit" class="btn btn-primary">Create post</button>
         </form>
     </div>
+
+    <script>
+    </script>
 
 @endsection

@@ -27,8 +27,16 @@
 
     @if ($posts->count())
         <div class="card mb-3 text-center">
-            <img src="https://source.unsplash.com/1200x400?{{ $posts[0]->category->name }}" class="card-img-top"
-                alt="{{ $posts[0]->slug }}">
+
+            @if ($posts[0]->image)
+                <div style="max-height: 350px; overflow:hidden;">
+                    <img src="{{ asset('storage/' . $posts[0]->image) }}" class="img-fluid mt-2"
+                        alt="{{ $posts[0]->category->name }}">
+                </div>
+            @else
+                <img src="https://source.unsplash.com/1200x400?{{ $posts[0]->category->name }}" class="card-img-top"
+                    alt="{{ $posts[0]->slug }}">
+            @endif
             <div class="card-body">
                 <h3 class="card-title"><a href="/posts/{{ $posts[0]->slug }}"
                         class="text-decoration-none text-dark">{{ $posts[0]->title }}</a></h3>
@@ -54,8 +62,13 @@
                             <div class="position-absolute bg-primary px-3 py-2 " style="border-bottom-right-radius: 5px;"><a
                                     href="/posts?category={{ $post->category->slug }}{{ request('author') == true ? '&author=' . request('author') : '' }}{{ request('search') == true ? '&search=' . request('search') : '' }}"
                                     class="text-white text-decoration-none">{{ $post->category->name }}</a></div>
-                            <img src="https://source.unsplash.com/500x400?{{ $post->category->name }}"
-                                class="card-img-top" alt="{{ $post->slug }}">
+                            @if ($post->image)
+                                <img src="{{ asset('storage/' . $post->image) }}" class="img-fluid"
+                                    alt="{{ $post->category->name }}">
+                            @else
+                                <img src="https://source.unsplash.com/500x400?{{ $post->category->name }}"
+                                    class="card-img-top" alt="{{ $post->slug }}">
+                            @endif
                             <div class="card-body">
                                 <h5 class="card-title">{{ $post->title }}</h5>
                                 <p>
